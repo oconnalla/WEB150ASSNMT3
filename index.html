@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Assignment 3</title>
+    </head>
+    <body>
+    <!-- CSS to make table appear better visually -->
+        <style>
+                table {
+                  font-family: arial, sans-serif;
+                  border-collapse: collapse;
+                  width: 100%;
+                }
+                
+                td, th {
+                  border: 1px solid #dddddd;
+                  text-align: left;
+                  padding: 8px;
+                }
+                
+                tr:nth-child(even) {
+                  background-color: #dddddd;
+                }
+                </style>
+
+        <h2>Cart</h2>
+        <table id="cartList">
+        </table>
+    
+    <script>
+        // array to hold items
+        itemsArray = [];
+        // create Labels for table
+        tableHeaders = ['Name', 'Description', 'Price', 'Quantity'];
+
+        function Item(name, description, price, quantity){
+            this.name = name;
+            this.description = description;
+            this.price = price;
+            this.quantity = quantity;
+            //meth to push the object's properties into an array
+            itemsArray.push(this);
+        }
+
+        //Create instances of cart objects
+        var item1 = new Item('Cortell Hairbrush', 'lightweight wire roundbrush', 7.99, 1);
+        var item2 = new Item('Mirelle Facewash', 'oil free acne cleansing wash', 7.99, 1);
+        var item3 = new Item('Dressella Maxi Dress', 'full length pink maxi dress', 7.99, 1);
+
+        // function to place the table headers
+        var createHeader = function(){
+            var cartTable = document.getElementById('cartList');
+                var tableRowTitle = document.createElement('tr');
+                cartTable.appendChild(tableRowTitle);
+            for (var i = 0; i < tableHeaders.length; i++){
+                var rowName = document.createElement('th');
+                rowName.textContent = tableHeaders[i];
+                tableRowTitle.appendChild(rowName);
+            }
+        }
+        //function to go through the array of created objects and place the values on the table
+        var renderRow = function(){
+            var cartTable = document.getElementById('cartList');
+
+            for( var i = 0; i < itemsArray.length; i++){
+
+                var itemRow = document.createElement('tr');
+                cartTable.appendChild(itemRow);
+        
+                var tdEl1 = document.createElement('td');
+                tdEl1.textContent = itemsArray[i].name;
+                itemRow.appendChild(tdEl1);
+
+                var tdEl2 = document.createElement('td');
+                tdEl2.textContent = itemsArray[i].description;
+                itemRow.appendChild(tdEl2);
+
+                var tdEl3 = document.createElement('td');
+                tdEl3.textContent = itemsArray[i].price;
+                itemRow.appendChild(tdEl3);
+
+                var tdEl4 = document.createElement('td');
+                tdEl4.textContent = itemsArray[i].quantity;
+                itemRow.appendChild(tdEl4);
+            }
+        }
+        createHeader();
+        renderRow();
+    </script>
+</body>
+</html>
